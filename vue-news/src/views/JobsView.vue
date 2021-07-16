@@ -1,24 +1,21 @@
 <template>
   <div>
-    <p v-for="job in fetchedJob" v-bind:key="job">
-      <a :href="job.url">{{ job.title }}</a>
-      <small>{{job.time_ago}}, {{job.domain}}</small>
-    </p>
+    <list-item></list-item>
+    
+    
   </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
-export default {
-  computed:{
-    ...mapGetters(['fetchedJob'])
-  },
-  created() {
-    this.$store.dispatch('FETCH_JOBS');
+import ListItem from '../components/ListItem.vue';
+
+export default{
+  components:{
+    ListItem,
   }
 }
 </script>
 
-<style>
-
+<style scoped>
+ 
 </style>

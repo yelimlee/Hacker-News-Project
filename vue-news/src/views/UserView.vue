@@ -1,17 +1,23 @@
 <template>
   <div>
-      <p>name: {{ fetchedUser.id }}</p>
-      <p>karma: {{ fetchedUser.karma }}</p>
-      <p>created: {{ fetchedUser.created }}</p>
+      <user-profile>
+        <div slot="username">{{fetchedUser.id }}</div>
+        <!-- template : 태그 없이 텍스트만 삽입되는 가상 태그 -->
+        <span slot="time">{{'Joined '+fetchedUser.created }}, </span>
+        <span slot="karma">{{ fetchedUser.karma }}</span>
+      </user-profile>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-
+import UserProfile from '../components/UserProfile.vue'
+import { mapGetters } from 'vuex'
 export default {
+  components:{
+    UserProfile,
+  },
   computed:{
-    ...mapGetters(['fetchedUser']),
+    ...mapGetters(['fetchedUser'])
   },
   created(){
     const userName = this.$route.params.id;

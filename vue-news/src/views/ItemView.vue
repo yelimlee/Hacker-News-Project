@@ -1,15 +1,34 @@
 <template>
   <div>
-      <p>{{fetchedItem.title}}</p>
-      <div>
-        {{fetchedItem.content}}
+    <section>
+      <!-- 사용자 상세 정보 -->
+      <user-profile>
+        <router-link slot="username" :to="`/user/${fetchedItem.user}`">
+          {{fetchedItem.user}}
+        </router-link>
+        <template slot="time">{{'Posted '+fetchedItem.time_ago}}</template>
+      </user-profile>
+    </section>
+    <section>
+      <h2>{{fetchedItem.title}}</h2>
+    </section>
+    <section>
+      <!-- 질문 댓글 -->
+      <!-- v-bind : 데이터를 그대로 표현 / v-html : 태그를 제외하고 표현  -->
+      <div v-html="fetchedItem.content">
+        
       </div>
+    </section>
   </div>
 </template>
 
 <script>
+import UserProfile from '../components/UserProfile.vue'
 import { mapGetters } from 'vuex'
 export default {
+  components:{
+    UserProfile,
+  },
   computed:{
     ...mapGetters(['fetchedItem'])
   },
@@ -20,6 +39,5 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
 </style>
